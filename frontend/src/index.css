@@ -1,0 +1,226 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-gray-900 text-gray-100;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom Weather Animations */
+@layer components {
+  /* Wind Animation */
+  .wind-streak {
+    @apply absolute bg-gray-300 bg-opacity-40 h-0.5 rounded-full opacity-0;
+    width: 100px;
+    animation: wind-blow 3s linear infinite;
+  }
+  
+  .wind-streak:nth-child(1) { 
+    top: 20%; 
+    animation-delay: 0s; 
+    left: -100px; 
+  }
+  
+  .wind-streak:nth-child(2) { 
+    top: 35%; 
+    animation-delay: 1s; 
+    left: -120px; 
+    width: 150px; 
+  }
+  
+  .wind-streak:nth-child(3) { 
+    top: 50%; 
+    animation-delay: 0.5s; 
+    left: -80px; 
+    width: 80px; 
+  }
+  
+  .wind-streak:nth-child(4) { 
+    top: 65%; 
+    animation-delay: 1.5s; 
+    left: -110px; 
+    width: 120px; 
+  }
+  
+  .wind-streak:nth-child(5) { 
+    top: 80%; 
+    animation-delay: 2s; 
+    left: -90px; 
+    width: 90px; 
+  }
+
+  /* Lightning Animation */
+  .lightning-flash {
+    @apply absolute inset-0 bg-blue-200 opacity-0 pointer-events-none;
+    animation: lightning-strike 8s infinite ease-out;
+    z-index: 1;
+  }
+
+  /* Rain Animation */
+  .rain-container {
+    @apply absolute inset-0 overflow-hidden;
+  }
+
+  .rain-drop {
+    @apply absolute bg-blue-300 opacity-60;
+    width: 2px;
+    height: 20px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: rain-fall linear infinite;
+    transform-origin: bottom;
+  }
+
+  .rain-drop:nth-child(odd) {
+    @apply bg-blue-400 opacity-40;
+    width: 1px;
+    height: 15px;
+  }
+
+  .rain-drop:nth-child(3n) {
+    @apply bg-gray-400 opacity-50;
+    width: 1.5px;
+    height: 18px;
+  }
+}
+
+@keyframes wind-blow {
+  0% { 
+    transform: translateX(0); 
+    opacity: 0; 
+  }
+  20% { 
+    opacity: 1; 
+  }
+  80% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateX(calc(100vw + 150px)); 
+    opacity: 0; 
+  }
+}
+
+@keyframes lightning-strike {
+  0% { opacity: 0; }
+  1% { opacity: 0.9; }
+  2% { opacity: 0.2; }
+  3% { opacity: 1; }
+  4% { opacity: 0; }
+  65% { opacity: 0; }
+  66% { opacity: 0.7; }
+  67% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100vh) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+/* Weather condition specific styles */
+.weather-clear {
+  transition: all 0.5s ease;
+}
+
+.weather-clouds {
+  transition: all 0.5s ease;
+}
+
+.weather-rain, .weather-drizzle {
+  transition: all 0.5s ease;
+}
+
+.weather-snow {
+  transition: all 0.5s ease;
+}
+
+.weather-thunderstorm {
+  transition: all 0.5s ease;
+}
+
+.weather-mist, .weather-fog, .weather-haze {
+  transition: all 0.5s ease;
+}
+
+/* Glassmorphism effects */
+.glass {
+  @apply bg-gray-800 bg-opacity-20 backdrop-blur-md border border-gray-600 border-opacity-30;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
